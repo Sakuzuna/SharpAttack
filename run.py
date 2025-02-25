@@ -8,6 +8,15 @@ import threading
 from typing import List, Dict
 from captcha_solver import solve_captcha 
 
+logo = '''
+  _________.__                           _____   __    __                 __    
+ /   _____/|  |__ _____ _____________   /  _  \_/  |__/  |______    ____ |  | __
+ \_____  \ |  |  \\__  \\_  __ \____ \ /  /_\  \   __\   __\__  \ _/ ___\|  |/ /
+ /        \|   Y  \/ __ \|  | \/  |_> >    |    \  |  |  |  / __ \\  \___|    < 
+/_______  /|___|  (____  /__|  |   __/\____|__  /__|  |__| (____  /\___  >__|_ \
+        \/      \/     \/      |__|           \/                \/     \/     \/
+'''
+
 def load_proxies(file_path: str) -> List[Dict[str, str]]:
     proxies = []
     with open(file_path, "r") as file:
@@ -153,7 +162,9 @@ def attack_thread(target_url: str, proxies: List[Dict[str, str]], user_agents: L
 
 def main():
     if len(sys.argv) != 5:
+        print(logo)
         print("Usage: python3 ddos_tool.py <target_url> <attack_method> <threads> <delay_ms>")
+        print("Example: python3 run.py http://example.com cloudflare 10 100")
         print("Available attack methods: http, cloudflare, firewall, ddos-guard, http-flood")
         sys.exit(1)
 
