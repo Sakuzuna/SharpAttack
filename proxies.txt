@@ -1,0 +1,5 @@
+proxy:port
+proxy:port
+proxy:port
+
+the proxy that the tool is using are socks4
